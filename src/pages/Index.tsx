@@ -142,7 +142,7 @@ const Index = () => {
             <div className="relative p-3 rounded-full ">
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
               <img
-                src="/public/logo-trans.png"
+                src="/logo-trans.png"
                 alt="SKYNET Logo"
                 className="relative w-20 h-20 object-contain filter drop-shadow-lg"
               />
