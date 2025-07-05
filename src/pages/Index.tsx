@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,30 +17,30 @@ const Index = () => {
   const plans = [
     {
       id: 'daily',
-      name: 'Neural Daily',
+      name: 'Daily Plan',
       price: '₦500',
       duration: '24 hours',
       icon: Clock,
       popular: false,
-      features: ['24-hour neural link', 'High-speed quantum net', 'All device sync', 'Basic AI assistance']
+      features: ['24-hour access', 'High-speed internet', 'All device support', 'Basic support']
     },
     {
       id: 'monthly',
-      name: 'Cybernetic Monthly',
+      name: 'Monthly Plan',
       price: '₦8,000',
       duration: '30 days',
       icon: Calendar,
       popular: true,
-      features: ['30-day neural access', 'Priority bandwidth', 'Multi-device matrix', 'Advanced AI support', 'Cloud consciousness']
+      features: ['30-day access', 'Priority bandwidth', 'Multiple devices', 'Premium support', 'Advanced features']
     },
     {
       id: 'semester',
-      name: 'Matrix Semester',
+      name: 'Semester Plan',
       price: '₦35,000',
       duration: '6 months',
       icon: GraduationCap,
       popular: false,
-      features: ['6-month deep dive', 'Ultra-fast neural net', 'Unlimited device sync', '24/7 AI companion', 'Enhanced learning protocols', 'Reality augmentation']
+      features: ['6-month access', 'Ultra-fast speeds', 'Unlimited devices', '24/7 support', 'Premium features', 'Priority service']
     }
   ];
 
@@ -130,12 +131,12 @@ const Index = () => {
                 SKYNET
               </h1>
               <div className="text-blue-300 text-sm tracking-widest font-mono">
-                NEURAL ACCESS PROTOCOL
+                INTERNET ACCESS PORTAL
               </div>
             </div>
           </div>
           <p className="text-center text-blue-200/80 mt-4 font-light">
-            Initialize your connection to the neural network
+            Choose your internet subscription plan
           </p>
         </div>
       </div>
@@ -147,16 +148,16 @@ const Index = () => {
             <CardHeader className="text-center">
               <CardTitle className="text-cyan-400 flex items-center justify-center space-x-2 text-xl">
                 <CheckCircle className="h-6 w-6" />
-                <span>Neural Link Active?</span>
+                <span>Already Subscribed?</span>
               </CardTitle>
               <CardDescription className="text-blue-200/70">
-                Enter your neural ID to reconnect to the matrix
+                Enter your email to access the internet
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <Input
                 type="email"
-                placeholder="Neural ID (email@skynet.ai)"
+                placeholder="Enter your email address"
                 value={isExistingUser ? email : ''}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -175,7 +176,7 @@ const Index = () => {
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
                     <span>Connecting...</span>
                   </div>
-                ) : "Initialize Neural Link"}
+                ) : "Connect to Internet"}
               </Button>
             </CardContent>
           </Card>
@@ -194,10 +195,10 @@ const Index = () => {
         <div className="mb-12">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4">
-              Choose Your Neural Access Level
+              Choose Your Subscription Plan
             </h2>
             <p className="text-blue-200/70 text-lg font-light">
-              Select the perfect neural interface package for your consciousness
+              Select the perfect internet package for your needs
             </p>
           </div>
 
@@ -218,7 +219,7 @@ const Index = () => {
                 >
                   {plan.popular && (
                     <Badge className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-1 text-sm font-semibold shadow-lg">
-                      NEURAL PRIORITY
+                      MOST POPULAR
                     </Badge>
                   )}
                   
@@ -254,7 +255,7 @@ const Index = () => {
                         handlePlanSelect(plan.id);
                       }}
                     >
-                      {isSelected ? 'NEURAL LINK ACTIVE' : 'INITIALIZE CONNECTION'}
+                      {isSelected ? 'SELECTED' : 'SELECT PLAN'}
                     </Button>
                   </CardContent>
                 </Card>
@@ -267,15 +268,15 @@ const Index = () => {
         {selectedPlan && (
           <Card className="max-w-md mx-auto bg-black/40 backdrop-blur-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20">
             <CardHeader className="text-center">
-              <CardTitle className="text-blue-400 text-xl">Finalize Neural Access</CardTitle>
+              <CardTitle className="text-blue-400 text-xl">Complete Your Purchase</CardTitle>
               <CardDescription className="text-blue-200/70">
-                Complete your connection to the SKYNET matrix
+                Enter your email and proceed to payment
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <Input
                 type="email"
-                placeholder="Neural ID (email@skynet.ai)"
+                placeholder="Enter your email address"
                 value={!isExistingUser ? email : ''}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -286,13 +287,13 @@ const Index = () => {
               
               <div className="p-6 bg-gradient-to-r from-blue-900/30 to-cyan-900/30 rounded-lg border border-cyan-500/30">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="font-semibold text-blue-200">Selected Protocol:</span>
+                  <span className="font-semibold text-blue-200">Selected Plan:</span>
                   <span className="text-cyan-400 font-bold">
                     {plans.find(p => p.id === selectedPlan)?.name}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold text-blue-200">Neural Cost:</span>
+                  <span className="font-semibold text-blue-200">Total Amount:</span>
                   <span className="text-cyan-400 font-bold text-xl">
                     {plans.find(p => p.id === selectedPlan)?.price}
                   </span>
@@ -309,7 +310,7 @@ const Index = () => {
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
                     <span>Processing...</span>
                   </div>
-                ) : "Access SKYNET Matrix"}
+                ) : "Pay with Paystack"}
               </Button>
             </CardContent>
           </Card>
@@ -320,7 +321,7 @@ const Index = () => {
       <footer className="relative bg-black/20 backdrop-blur-xl border-t border-blue-500/30 mt-16">
         <div className="container mx-auto px-4 py-8 text-center">
           <p className="text-blue-200/60 font-mono text-sm">
-            Quantum-encrypted transactions powered by Paystack • Neural support 24/7/365
+            Secure payments powered by Paystack • 24/7 customer support
           </p>
           <div className="mt-2 flex items-center justify-center space-x-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
