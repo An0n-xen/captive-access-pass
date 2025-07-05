@@ -1,47 +1,59 @@
-
-import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Wifi, CheckCircle, Clock, Calendar, GraduationCap, Network } from "lucide-react";
+import {
+  Wifi,
+  CheckCircle,
+  Clock,
+  Calendar,
+  GraduationCap,
+  Network,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isExistingUser, setIsExistingUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const plans = [
     {
-      id: 'daily',
-      name: 'Daily Plan',
-      price: '₦500',
-      duration: '24 hours',
+      id: "daily",
+      name: "Daily Plan",
+      price: "Gh₵ 500",
+      duration: "24 hours",
       icon: Clock,
       popular: false,
-      features: ['24-hour access', 'High-speed internet', 'All device support', 'Basic support']
+      features: ["24-hour access", "High-speed internet", "2 device support"],
     },
     {
-      id: 'monthly',
-      name: 'Monthly Plan',
-      price: '₦8,000',
-      duration: '30 days',
+      id: "monthly",
+      name: "Monthly Plan",
+      price: "Gh₵ 8,000",
+      duration: "30 days",
       icon: Calendar,
       popular: true,
-      features: ['30-day access', 'Priority bandwidth', 'Multiple devices', 'Premium support', 'Advanced features']
+      features: ["30-day access", "High-speed internet", "2 device support"],
     },
     {
-      id: 'semester',
-      name: 'Semester Plan',
-      price: '₦35,000',
-      duration: '6 months',
+      id: "semester",
+      name: "Semester Plan",
+      price: "Gh₵ 35,000",
+      duration: "3 months",
       icon: GraduationCap,
       popular: false,
-      features: ['6-month access', 'Ultra-fast speeds', 'Unlimited devices', '24/7 support', 'Premium features', 'Priority service']
-    }
+      features: ["3-month access", "High-speed internet", "2 device support"],
+    },
   ];
 
   const handlePlanSelect = (planId: string) => {
@@ -54,18 +66,18 @@ const Index = () => {
       toast({
         title: "Email required",
         description: "Please enter your email address",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
 
     setIsLoading(true);
-    
+
     // Simulate checking existing subscription
     setTimeout(() => {
       // Mock check - in real app, this would verify against your database
       const hasActiveSubscription = Math.random() > 0.5; // 50% chance for demo
-      
+
       if (hasActiveSubscription) {
         toast({
           title: "Access granted!",
@@ -75,8 +87,9 @@ const Index = () => {
       } else {
         toast({
           title: "No active subscription",
-          description: "No active subscription found for this email. Please purchase a plan.",
-          variant: "destructive"
+          description:
+            "No active subscription found for this email. Please purchase a plan.",
+          variant: "destructive",
         });
       }
       setIsLoading(false);
@@ -88,12 +101,12 @@ const Index = () => {
       toast({
         title: "Missing information",
         description: "Please select a plan and enter your email",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
 
-    const plan = plans.find(p => p.id === selectedPlan);
+    const plan = plans.find((p) => p.id === selectedPlan);
     setIsLoading(true);
 
     // Simulate Paystack integration
@@ -102,10 +115,14 @@ const Index = () => {
         title: "Redirecting to payment",
         description: `Redirecting to Paystack for ${plan?.name} payment...`,
       });
-      
+
       // In a real app, you would integrate with Paystack here
-      console.log('Payment initiated for:', { email, plan: selectedPlan, amount: plan?.price });
-      
+      console.log("Payment initiated for:", {
+        email,
+        plan: selectedPlan,
+        amount: plan?.price,
+      });
+
       setIsLoading(false);
     }, 1500);
   };
@@ -114,17 +131,17 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
       {/* Futuristic Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(59,130,246,0.15),transparent_50%),radial-gradient(circle_at_80%_20%,_rgba(99,102,241,0.15),transparent_50%),radial-gradient(circle_at_40%_40%,_rgba(34,211,238,0.1),transparent_50%)]"></div>
-      
+
       {/* Neural Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-      
+
       {/* Header */}
       <div className="relative bg-black/20 backdrop-blur-xl border-b border-blue-500/30">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center space-x-4">
             <div className="relative p-3 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-lg shadow-blue-500/50">
-              <Network className="h-8 w-8 text-white" />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
+              <Network className="h-8 w-8 text-white" />
             </div>
             <div className="text-center">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
@@ -158,7 +175,7 @@ const Index = () => {
               <Input
                 type="email"
                 placeholder="Enter your email address"
-                value={isExistingUser ? email : ''}
+                value={isExistingUser ? email : ""}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setIsExistingUser(true);
@@ -166,7 +183,7 @@ const Index = () => {
                 }}
                 className="bg-black/30 border-cyan-500/50 focus:border-cyan-400 text-white placeholder:text-blue-300/50 h-12"
               />
-              <Button 
+              <Button
                 onClick={handleExistingUserLogin}
                 disabled={isLoading || !email || !isExistingUser}
                 className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold h-12 shadow-lg shadow-cyan-500/25"
@@ -176,7 +193,9 @@ const Index = () => {
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
                     <span>Connecting...</span>
                   </div>
-                ) : "Connect to Internet"}
+                ) : (
+                  "Connect to Internet"
+                )}
               </Button>
             </CardContent>
           </Card>
@@ -186,7 +205,9 @@ const Index = () => {
         <div className="flex items-center justify-center mb-12">
           <div className="border-t border-gradient-to-r from-transparent via-cyan-500/50 to-transparent flex-1 h-px"></div>
           <div className="mx-6 px-4 py-2 bg-black/40 backdrop-blur-sm border border-cyan-500/30 rounded-full">
-            <span className="text-cyan-400 font-mono text-sm tracking-wider">OR</span>
+            <span className="text-cyan-400 font-mono text-sm tracking-wider">
+              OR
+            </span>
           </div>
           <div className="border-t border-gradient-to-r from-transparent via-cyan-500/50 to-transparent flex-1 h-px"></div>
         </div>
@@ -206,15 +227,19 @@ const Index = () => {
             {plans.map((plan) => {
               const IconComponent = plan.icon;
               const isSelected = selectedPlan === plan.id;
-              
+
               return (
-                <Card 
+                <Card
                   key={plan.id}
                   className={`relative cursor-pointer transition-all duration-500 hover:scale-105 ${
-                    isSelected 
-                      ? 'ring-2 ring-cyan-400 bg-black/60 shadow-2xl shadow-cyan-500/30' 
-                      : 'bg-black/40 backdrop-blur-xl hover:bg-black/60 shadow-xl shadow-blue-500/20'
-                  } ${plan.popular ? 'border-2 border-cyan-500/50' : 'border border-blue-500/30'}`}
+                    isSelected
+                      ? "ring-2 ring-cyan-400 bg-black/60 shadow-2xl shadow-cyan-500/30"
+                      : "bg-black/40 backdrop-blur-xl hover:bg-black/60 shadow-xl shadow-blue-500/20"
+                  } ${
+                    plan.popular
+                      ? "border-2 border-cyan-500/50"
+                      : "border border-blue-500/30"
+                  }`}
                   onClick={() => handlePlanSelect(plan.id)}
                 >
                   {plan.popular && (
@@ -222,40 +247,47 @@ const Index = () => {
                       MOST POPULAR
                     </Badge>
                   )}
-                  
+
                   <CardHeader className="text-center pb-6">
                     <div className="mx-auto mb-6 p-4 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 rounded-full w-fit border border-cyan-500/30">
                       <IconComponent className="h-10 w-10 text-cyan-400" />
                     </div>
-                    <CardTitle className="text-2xl text-white font-bold">{plan.name}</CardTitle>
-                    <CardDescription className="text-blue-300/70 font-mono">{plan.duration}</CardDescription>
+                    <CardTitle className="text-2xl text-white font-bold">
+                      {plan.name}
+                    </CardTitle>
+                    <CardDescription className="text-blue-300/70 font-mono">
+                      {plan.duration}
+                    </CardDescription>
                     <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mt-4">
                       {plan.price}
                     </div>
                   </CardHeader>
-                  
+
                   <CardContent>
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, index) => (
-                        <li key={index} className="flex items-center space-x-3 text-blue-100/90">
+                        <li
+                          key={index}
+                          className="flex items-center space-x-3 text-blue-100/90"
+                        >
                           <CheckCircle className="h-5 w-5 text-cyan-400 flex-shrink-0" />
                           <span className="text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    
-                    <Button 
+
+                    <Button
                       className={`w-full h-12 font-semibold transition-all duration-300 ${
-                        isSelected 
-                          ? 'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 shadow-lg shadow-cyan-500/25' 
-                          : 'bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 text-blue-200'
+                        isSelected
+                          ? "bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 shadow-lg shadow-cyan-500/25"
+                          : "bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 text-blue-200"
                       }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handlePlanSelect(plan.id);
                       }}
                     >
-                      {isSelected ? 'SELECTED' : 'SELECT PLAN'}
+                      {isSelected ? "SELECTED" : "SELECT PLAN"}
                     </Button>
                   </CardContent>
                 </Card>
@@ -268,7 +300,9 @@ const Index = () => {
         {selectedPlan && (
           <Card className="max-w-md mx-auto bg-black/40 backdrop-blur-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20">
             <CardHeader className="text-center">
-              <CardTitle className="text-blue-400 text-xl">Complete Your Purchase</CardTitle>
+              <CardTitle className="text-blue-400 text-xl">
+                Complete Your Purchase
+              </CardTitle>
               <CardDescription className="text-blue-200/70">
                 Enter your email and proceed to payment
               </CardDescription>
@@ -277,30 +311,34 @@ const Index = () => {
               <Input
                 type="email"
                 placeholder="Enter your email address"
-                value={!isExistingUser ? email : ''}
+                value={!isExistingUser ? email : ""}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setIsExistingUser(false);
                 }}
                 className="bg-black/30 border-blue-500/50 focus:border-blue-400 text-white placeholder:text-blue-300/50 h-12"
               />
-              
+
               <div className="p-6 bg-gradient-to-r from-blue-900/30 to-cyan-900/30 rounded-lg border border-cyan-500/30">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="font-semibold text-blue-200">Selected Plan:</span>
+                  <span className="font-semibold text-blue-200">
+                    Selected Plan:
+                  </span>
                   <span className="text-cyan-400 font-bold">
-                    {plans.find(p => p.id === selectedPlan)?.name}
+                    {plans.find((p) => p.id === selectedPlan)?.name}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold text-blue-200">Total Amount:</span>
+                  <span className="font-semibold text-blue-200">
+                    Total Amount:
+                  </span>
                   <span className="text-cyan-400 font-bold text-xl">
-                    {plans.find(p => p.id === selectedPlan)?.price}
+                    {plans.find((p) => p.id === selectedPlan)?.price}
                   </span>
                 </div>
               </div>
-              
-              <Button 
+
+              <Button
                 onClick={handlePayment}
                 disabled={isLoading || !email || isExistingUser}
                 className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold h-12 shadow-lg shadow-blue-500/25"
@@ -310,7 +348,9 @@ const Index = () => {
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
                     <span>Processing...</span>
                   </div>
-                ) : "Pay with Paystack"}
+                ) : (
+                  "Pay with Paystack"
+                )}
               </Button>
             </CardContent>
           </Card>
@@ -325,7 +365,9 @@ const Index = () => {
           </p>
           <div className="mt-2 flex items-center justify-center space-x-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-green-400 text-xs font-mono">SKYNET STATUS: ONLINE</span>
+            <span className="text-green-400 text-xs font-mono">
+              SKYNET STATUS: ONLINE
+            </span>
           </div>
         </div>
       </footer>
