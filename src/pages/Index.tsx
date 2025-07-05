@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Wifi, CheckCircle, Clock, Calendar, GraduationCap } from "lucide-react";
+import { Wifi, CheckCircle, Clock, Calendar, GraduationCap, Network } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -16,30 +16,30 @@ const Index = () => {
   const plans = [
     {
       id: 'daily',
-      name: 'Daily Pass',
+      name: 'Neural Daily',
       price: '₦500',
       duration: '24 hours',
       icon: Clock,
       popular: false,
-      features: ['24-hour access', 'High-speed internet', 'All devices']
+      features: ['24-hour neural link', 'High-speed quantum net', 'All device sync', 'Basic AI assistance']
     },
     {
       id: 'monthly',
-      name: 'Monthly Plan',
+      name: 'Cybernetic Monthly',
       price: '₦8,000',
       duration: '30 days',
       icon: Calendar,
       popular: true,
-      features: ['30-day access', 'Priority bandwidth', 'All devices', 'Technical support']
+      features: ['30-day neural access', 'Priority bandwidth', 'Multi-device matrix', 'Advanced AI support', 'Cloud consciousness']
     },
     {
       id: 'semester',
-      name: 'Semester Package',
+      name: 'Matrix Semester',
       price: '₦35,000',
       duration: '6 months',
       icon: GraduationCap,
       popular: false,
-      features: ['6-month access', 'Premium bandwidth', 'All devices', '24/7 support', 'Study resources']
+      features: ['6-month deep dive', 'Ultra-fast neural net', 'Unlimited device sync', '24/7 AI companion', 'Enhanced learning protocols', 'Reality augmentation']
     }
   ];
 
@@ -110,73 +110,98 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+      {/* Futuristic Background Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(59,130,246,0.15),transparent_50%),radial-gradient(circle_at_80%_20%,_rgba(99,102,241,0.15),transparent_50%),radial-gradient(circle_at_40%_40%,_rgba(34,211,238,0.1),transparent_50%)]"></div>
+      
+      {/* Neural Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+      
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-blue-100">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-center space-x-3">
-            <div className="p-2 bg-blue-500 rounded-full">
-              <Wifi className="h-6 w-6 text-white" />
+      <div className="relative bg-black/20 backdrop-blur-xl border-b border-blue-500/30">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center space-x-4">
+            <div className="relative p-3 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-lg shadow-blue-500/50">
+              <Network className="h-8 w-8 text-white" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
             </div>
-            <h1 className="text-2xl font-bold text-gray-800">Campus Connect</h1>
+            <div className="text-center">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
+                SKYNET
+              </h1>
+              <div className="text-blue-300 text-sm tracking-widest font-mono">
+                NEURAL ACCESS PROTOCOL
+              </div>
+            </div>
           </div>
-          <p className="text-center text-gray-600 mt-2">Choose your internet access plan</p>
+          <p className="text-center text-blue-200/80 mt-4 font-light">
+            Initialize your connection to the neural network
+          </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="relative container mx-auto px-4 py-12">
         {/* Existing User Login Section */}
-        <div className="mb-8">
-          <Card className="max-w-md mx-auto bg-white/70 backdrop-blur-sm border-green-200">
+        <div className="mb-12">
+          <Card className="max-w-md mx-auto bg-black/40 backdrop-blur-xl border border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
             <CardHeader className="text-center">
-              <CardTitle className="text-green-700 flex items-center justify-center space-x-2">
-                <CheckCircle className="h-5 w-5" />
-                <span>Already have access?</span>
+              <CardTitle className="text-cyan-400 flex items-center justify-center space-x-2 text-xl">
+                <CheckCircle className="h-6 w-6" />
+                <span>Neural Link Active?</span>
               </CardTitle>
-              <CardDescription>
-                Enter your email to log in with your existing subscription
+              <CardDescription className="text-blue-200/70">
+                Enter your neural ID to reconnect to the matrix
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6">
               <Input
                 type="email"
-                placeholder="Enter your email address"
+                placeholder="Neural ID (email@skynet.ai)"
                 value={isExistingUser ? email : ''}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setIsExistingUser(true);
                   setSelectedPlan(null);
                 }}
-                className="border-green-300 focus:border-green-500"
+                className="bg-black/30 border-cyan-500/50 focus:border-cyan-400 text-white placeholder:text-blue-300/50 h-12"
               />
               <Button 
                 onClick={handleExistingUserLogin}
                 disabled={isLoading || !email || !isExistingUser}
-                className="w-full bg-green-600 hover:bg-green-700"
+                className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold h-12 shadow-lg shadow-cyan-500/25"
               >
-                {isLoading ? "Checking..." : "Log In"}
+                {isLoading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                    <span>Connecting...</span>
+                  </div>
+                ) : "Initialize Neural Link"}
               </Button>
             </CardContent>
           </Card>
         </div>
 
-        {/* Divider */}
-        <div className="flex items-center justify-center mb-8">
-          <div className="border-t border-gray-300 flex-1"></div>
-          <span className="px-4 text-gray-500 bg-white/70 rounded-full">OR</span>
-          <div className="border-t border-gray-300 flex-1"></div>
+        {/* Futuristic Divider */}
+        <div className="flex items-center justify-center mb-12">
+          <div className="border-t border-gradient-to-r from-transparent via-cyan-500/50 to-transparent flex-1 h-px"></div>
+          <div className="mx-6 px-4 py-2 bg-black/40 backdrop-blur-sm border border-cyan-500/30 rounded-full">
+            <span className="text-cyan-400 font-mono text-sm tracking-wider">OR</span>
+          </div>
+          <div className="border-t border-gradient-to-r from-transparent via-cyan-500/50 to-transparent flex-1 h-px"></div>
         </div>
 
         {/* Subscription Plans */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">
-            Choose Your Plan
-          </h2>
-          <p className="text-center text-gray-600 mb-8">
-            Select the perfect internet access plan for your needs
-          </p>
+        <div className="mb-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4">
+              Choose Your Neural Access Level
+            </h2>
+            <p className="text-blue-200/70 text-lg font-light">
+              Select the perfect neural interface package for your consciousness
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {plans.map((plan) => {
               const IconComponent = plan.icon;
               const isSelected = selectedPlan === plan.id;
@@ -184,52 +209,52 @@ const Index = () => {
               return (
                 <Card 
                   key={plan.id}
-                  className={`relative cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                  className={`relative cursor-pointer transition-all duration-500 hover:scale-105 ${
                     isSelected 
-                      ? 'ring-2 ring-blue-500 bg-blue-50/50' 
-                      : 'bg-white/70 backdrop-blur-sm hover:bg-white/90'
-                  } ${plan.popular ? 'border-blue-500' : 'border-gray-200'}`}
+                      ? 'ring-2 ring-cyan-400 bg-black/60 shadow-2xl shadow-cyan-500/30' 
+                      : 'bg-black/40 backdrop-blur-xl hover:bg-black/60 shadow-xl shadow-blue-500/20'
+                  } ${plan.popular ? 'border-2 border-cyan-500/50' : 'border border-blue-500/30'}`}
                   onClick={() => handlePlanSelect(plan.id)}
                 >
                   {plan.popular && (
-                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500">
-                      Most Popular
+                    <Badge className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-1 text-sm font-semibold shadow-lg">
+                      NEURAL PRIORITY
                     </Badge>
                   )}
                   
-                  <CardHeader className="text-center pb-4">
-                    <div className="mx-auto mb-4 p-3 bg-blue-100 rounded-full w-fit">
-                      <IconComponent className="h-8 w-8 text-blue-600" />
+                  <CardHeader className="text-center pb-6">
+                    <div className="mx-auto mb-6 p-4 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 rounded-full w-fit border border-cyan-500/30">
+                      <IconComponent className="h-10 w-10 text-cyan-400" />
                     </div>
-                    <CardTitle className="text-xl text-gray-800">{plan.name}</CardTitle>
-                    <CardDescription>{plan.duration}</CardDescription>
-                    <div className="text-3xl font-bold text-blue-600 mt-2">
+                    <CardTitle className="text-2xl text-white font-bold">{plan.name}</CardTitle>
+                    <CardDescription className="text-blue-300/70 font-mono">{plan.duration}</CardDescription>
+                    <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mt-4">
                       {plan.price}
                     </div>
                   </CardHeader>
                   
                   <CardContent>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, index) => (
-                        <li key={index} className="flex items-center space-x-2 text-sm text-gray-600">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                          <span>{feature}</span>
+                        <li key={index} className="flex items-center space-x-3 text-blue-100/90">
+                          <CheckCircle className="h-5 w-5 text-cyan-400 flex-shrink-0" />
+                          <span className="text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
                     
                     <Button 
-                      className={`w-full mt-6 ${
+                      className={`w-full h-12 font-semibold transition-all duration-300 ${
                         isSelected 
-                          ? 'bg-blue-600 hover:bg-blue-700' 
-                          : 'bg-gray-600 hover:bg-gray-700'
+                          ? 'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 shadow-lg shadow-cyan-500/25' 
+                          : 'bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 text-blue-200'
                       }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handlePlanSelect(plan.id);
                       }}
                     >
-                      {isSelected ? 'Selected' : 'Select Plan'}
+                      {isSelected ? 'NEURAL LINK ACTIVE' : 'INITIALIZE CONNECTION'}
                     </Button>
                   </CardContent>
                 </Card>
@@ -240,35 +265,35 @@ const Index = () => {
 
         {/* Payment Section */}
         {selectedPlan && (
-          <Card className="max-w-md mx-auto bg-white/70 backdrop-blur-sm border-blue-200">
+          <Card className="max-w-md mx-auto bg-black/40 backdrop-blur-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20">
             <CardHeader className="text-center">
-              <CardTitle className="text-blue-700">Complete Your Purchase</CardTitle>
-              <CardDescription>
-                Enter your email and proceed to payment
+              <CardTitle className="text-blue-400 text-xl">Finalize Neural Access</CardTitle>
+              <CardDescription className="text-blue-200/70">
+                Complete your connection to the SKYNET matrix
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6">
               <Input
                 type="email"
-                placeholder="Enter your email address"
+                placeholder="Neural ID (email@skynet.ai)"
                 value={!isExistingUser ? email : ''}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setIsExistingUser(false);
                 }}
-                className="border-blue-300 focus:border-blue-500"
+                className="bg-black/30 border-blue-500/50 focus:border-blue-400 text-white placeholder:text-blue-300/50 h-12"
               />
               
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">Selected Plan:</span>
-                  <span className="text-blue-600 font-bold">
+              <div className="p-6 bg-gradient-to-r from-blue-900/30 to-cyan-900/30 rounded-lg border border-cyan-500/30">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="font-semibold text-blue-200">Selected Protocol:</span>
+                  <span className="text-cyan-400 font-bold">
                     {plans.find(p => p.id === selectedPlan)?.name}
                   </span>
                 </div>
-                <div className="flex justify-between items-center mt-2">
-                  <span className="font-medium">Amount:</span>
-                  <span className="text-blue-600 font-bold text-lg">
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold text-blue-200">Neural Cost:</span>
+                  <span className="text-cyan-400 font-bold text-xl">
                     {plans.find(p => p.id === selectedPlan)?.price}
                   </span>
                 </div>
@@ -277,9 +302,14 @@ const Index = () => {
               <Button 
                 onClick={handlePayment}
                 disabled={isLoading || !email || isExistingUser}
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold h-12 shadow-lg shadow-blue-500/25"
               >
-                {isLoading ? "Processing..." : "Pay with Paystack"}
+                {isLoading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : "Access SKYNET Matrix"}
               </Button>
             </CardContent>
           </Card>
@@ -287,9 +317,15 @@ const Index = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white/80 backdrop-blur-sm border-t border-gray-200 mt-12">
-        <div className="container mx-auto px-4 py-6 text-center text-gray-600">
-          <p>Secure payment powered by Paystack • 24/7 Technical Support</p>
+      <footer className="relative bg-black/20 backdrop-blur-xl border-t border-blue-500/30 mt-16">
+        <div className="container mx-auto px-4 py-8 text-center">
+          <p className="text-blue-200/60 font-mono text-sm">
+            Quantum-encrypted transactions powered by Paystack • Neural support 24/7/365
+          </p>
+          <div className="mt-2 flex items-center justify-center space-x-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-green-400 text-xs font-mono">SKYNET STATUS: ONLINE</span>
+          </div>
         </div>
       </footer>
     </div>
