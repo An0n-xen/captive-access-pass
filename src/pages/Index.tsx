@@ -139,9 +139,13 @@ const Index = () => {
       <div className="relative bg-black/20 backdrop-blur-xl border-b border-blue-500/30">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center space-x-4">
-            <div className="relative p-3 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-lg shadow-blue-500/50">
+            <div className="relative p-3 rounded-full ">
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
-              <Network className="h-8 w-8 text-white" />
+              <img
+                src="/public/logo-trans.png"
+                alt="SKYNET Logo"
+                className="relative w-20 h-20 object-contain filter drop-shadow-lg"
+              />
             </div>
             <div className="text-center">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
