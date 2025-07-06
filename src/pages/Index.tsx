@@ -18,6 +18,7 @@ import {
   Network,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
 
 const Index = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -30,7 +31,7 @@ const Index = () => {
     {
       id: "daily",
       name: "Daily Plan",
-      price: "Gh₵ 500",
+      price: "500",
       duration: "24 hours",
       icon: Clock,
       popular: false,
@@ -39,7 +40,7 @@ const Index = () => {
     {
       id: "monthly",
       name: "Monthly Plan",
-      price: "Gh₵ 8,000",
+      price: "8,000",
       duration: "30 days",
       icon: Calendar,
       popular: true,
@@ -48,7 +49,7 @@ const Index = () => {
     {
       id: "semester",
       name: "Semester Plan",
-      price: "Gh₵ 35,000",
+      price: "35,000",
       duration: "3 months",
       icon: GraduationCap,
       popular: false,
@@ -96,6 +97,37 @@ const Index = () => {
     }, 2000);
   };
 
+  // const handlePayment = async () => {
+  //   if (!email || !selectedPlan) {
+  //     toast({
+  //       title: "Missing information",
+  //       description: "Please select a plan and enter your email",
+  //       variant: "destructive",
+  //     });
+  //     return;
+  //   }
+
+  //   const plan = plans.find((p) => p.id === selectedPlan);
+  //   setIsLoading(true);
+
+  //   // Simulate Paystack integration
+  //   setTimeout(() => {
+  //     toast({
+  //       title: "Redirecting to payment",
+  //       description: `Redirecting to Paystack for ${plan?.name} payment...`,
+  //     });
+
+  //     // In a real app, you would integrate with Paystack here
+  //     console.log("Payment initiated for:", {
+  //       email,
+  //       plan: selectedPlan,
+  //       amount: plan?.price,
+  //     });
+
+  //     setIsLoading(false);
+  //   }, 1500);
+  // };
+
   const handlePayment = async () => {
     if (!email || !selectedPlan) {
       toast({
@@ -107,24 +139,59 @@ const Index = () => {
     }
 
     const plan = plans.find((p) => p.id === selectedPlan);
+    if (!plan) {
+      toast({
+        title: "Invalid plan",
+        description: "Selected plan not found",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
-    // Simulate Paystack integration
-    setTimeout(() => {
+    try {
+      // Initialize payment with your backend
+      const { data } = await axios.post(
+        "http://localhost:3000/api/payment/initialize",
+        {
+          email,
+          amount: plan.price + "00",
+          metadata: {
+            plan_id: selectedPlan,
+            plan_name: plan.name,
+            customer_email: email,
+          },
+        }
+      );
+
+      if (!data.success) {
+        throw new Error(data.message || "Failed to initialize payment");
+      }
+
+      // Show success toast
       toast({
         title: "Redirecting to payment",
-        description: `Redirecting to Paystack for ${plan?.name} payment...`,
+        description: `Redirecting to Paystack for ${plan.name} payment...`,
       });
 
-      // In a real app, you would integrate with Paystack here
-      console.log("Payment initiated for:", {
-        email,
-        plan: selectedPlan,
-        amount: plan?.price,
-      });
+      // Redirect to Paystack payment page
+      window.location.href = data.data.authorization_url;
+    } catch (error) {
+      console.error("Payment initialization error:", error);
 
+      const errorMessage = axios.isAxiosError(error)
+        ? error.response?.data?.message || error.message
+        : "Failed to initialize payment. Please try again.";
+
+      toast({
+        title: "Payment Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -263,7 +330,7 @@ const Index = () => {
                       {plan.duration}
                     </CardDescription>
                     <div className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mt-4">
-                      {plan.price}
+                      Gh₵ {plan.price}
                     </div>
                   </CardHeader>
 
