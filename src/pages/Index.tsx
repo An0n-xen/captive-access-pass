@@ -31,7 +31,7 @@ const Index = () => {
     {
       id: "daily",
       name: "Daily Plan",
-      price: "500",
+      price: "5",
       duration: "24 hours",
       icon: Clock,
       popular: false,
@@ -40,7 +40,7 @@ const Index = () => {
     {
       id: "monthly",
       name: "Monthly Plan",
-      price: "8,000",
+      price: "110",
       duration: "30 days",
       icon: Calendar,
       popular: true,
@@ -49,7 +49,7 @@ const Index = () => {
     {
       id: "semester",
       name: "Semester Plan",
-      price: "35,000",
+      price: "250",
       duration: "3 months",
       icon: GraduationCap,
       popular: false,
@@ -97,37 +97,6 @@ const Index = () => {
     }, 2000);
   };
 
-  // const handlePayment = async () => {
-  //   if (!email || !selectedPlan) {
-  //     toast({
-  //       title: "Missing information",
-  //       description: "Please select a plan and enter your email",
-  //       variant: "destructive",
-  //     });
-  //     return;
-  //   }
-
-  //   const plan = plans.find((p) => p.id === selectedPlan);
-  //   setIsLoading(true);
-
-  //   // Simulate Paystack integration
-  //   setTimeout(() => {
-  //     toast({
-  //       title: "Redirecting to payment",
-  //       description: `Redirecting to Paystack for ${plan?.name} payment...`,
-  //     });
-
-  //     // In a real app, you would integrate with Paystack here
-  //     console.log("Payment initiated for:", {
-  //       email,
-  //       plan: selectedPlan,
-  //       amount: plan?.price,
-  //     });
-
-  //     setIsLoading(false);
-  //   }, 1500);
-  // };
-
   const handlePayment = async () => {
     if (!email || !selectedPlan) {
       toast({
@@ -160,7 +129,6 @@ const Index = () => {
           metadata: {
             plan_id: selectedPlan,
             plan_name: plan.name,
-            customer_email: email,
           },
         }
       );
