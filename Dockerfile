@@ -14,7 +14,7 @@ RUN yarn install
 COPY . .
 
 # Expose port
-EXPOSE 8080
+EXPOSE 8081
 
 # Start development server
-CMD ["yarn", "dev", "--host", "0.0.0.0"]
+CMD ["yarn", "dev", "--host", "0.0.0.0", "--port", "8081"]

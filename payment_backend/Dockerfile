@@ -7,10 +7,10 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN yarn install
 
 # Install TypeScript globally
-RUN npm install -g typescript ts-node
+RUN yarn add -g typescript ts-node
 
 # Copy source code
 COPY . .
@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 3000
 
 # Start the server
-CMD ["ts-node", "index.ts"]
+CMD ["yarn", "ts-node", "index.ts"]

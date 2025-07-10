@@ -333,78 +333,72 @@ const paystackAPI = async <T>(
 // Routes
 
 // Health check
-app.get("/health", (req: Request, res: Response): void => {
+app.get("/health", (req: Request, res: Response) => {
   res.json({ status: "OK", message: "Payment backend is running" });
 });
 
 // Initialize payment
-app.post(
-  "/api/payment/initialize",
-  async (req: Request, res: Response): Promise<void> => {
-    try {
-      const { email, amount }: PaymentInitializeRequest = req.body;
+app.post("/api/payment/initialize", async (req: Request, res: Response) => {
+  try {
+    const { email, amount }: PaymentInitializeRequest = req.body;
 
-      // Validate required fields
-      if (!email || !amount) {
-        res.status(400).json({
-          success: false,
-          message: "Email and amount are required",
-        });
-        return;
-      }
-
-      // Convert amount to number if it's a string
-      const numericAmount =
-        typeof amount === "string" ? parseFloat(amount) : amount;
-
-      // Validate that amount is a valid number
-      if (isNaN(numericAmount) || numericAmount <= 0) {
-        res.status(400).json({
-          success: false,
-          message: "Amount must be a valid positive number",
-        });
-        return;
-      }
-
-      const paymentData = {
-        email,
-        amount: numericAmount,
-      };
-
-      const result = await paystackAPI<PaymentInitializeResponse>(
-        "/transaction/initialize",
-        "POST",
-        paymentData
-      );
-
-      res.json({
-        success: true,
-        data: result.data,
-        message: "Payment initialized successfully",
-      });
-    } catch (error: any) {
-      console.error("Initialize payment error:", error.message);
-      res.status(500).json({
+    // Validate required fields
+    if (!email || !amount) {
+      return res.status(400).json({
         success: false,
-        message: error.message,
+        message: "Email and amount are required",
       });
     }
+
+    // Convert amount to number if it's a string
+    const numericAmount =
+      typeof amount === "string" ? parseFloat(amount) : amount;
+
+    // Validate that amount is a valid number
+    if (isNaN(numericAmount) || numericAmount <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Amount must be a valid positive number",
+      });
+    }
+
+    const paymentData = {
+      email,
+      amount: numericAmount,
+    };
+
+    const result = await paystackAPI<PaymentInitializeResponse>(
+      "/transaction/initialize",
+      "POST",
+      paymentData
+    );
+
+    res.json({
+      success: true,
+      data: result.data,
+      message: "Payment initialized successfully",
+    });
+  } catch (error: any) {
+    console.error("Initialize payment error:", error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
-);
+});
 
 // Verify payment
 app.get(
   "/api/payment/verify/:reference",
-  async (req: Request, res: Response): Promise<void> => {
+  async (req: Request, res: Response) => {
     try {
       const { reference } = req.params;
 
       if (!reference) {
-        res.status(400).json({
+        return res.status(400).json({
           success: false,
           message: "Payment reference is required",
         });
-        return;
       }
 
       const result = await paystackAPI<TransactionData>(
@@ -427,7 +421,7 @@ app.get(
 );
 
 // Webhook endpoint
-app.post("/api/webhook/paystack", (req: Request, res: Response): void => {
+app.post("/api/webhook/paystack", (req: Request, res: Response) => {
   try {
     const event: WebhookEvent = req.body;
 
@@ -473,34 +467,31 @@ app.post("/api/webhook/paystack", (req: Request, res: Response): void => {
 });
 
 // Database Status
-app.get(
-  "/api/database/status",
-  async (req: Request, res: Response): Promise<void> => {
-    try {
-      await client.db("admin").command({ ping: 1 });
+app.get("/api/database/status", async (req: Request, res: Response) => {
+  try {
+    await client.db("admin").command({ ping: 1 });
 
-      const collections = await db.listCollections().toArray();
-      const stats = {
-        customers: await customersCollection.countDocuments(),
-        transactions: await transactionsCollection.countDocuments(),
-        transfers: await active_users.countDocuments(),
-      };
+    const collections = await db.listCollections().toArray();
+    const stats = {
+      customers: await customersCollection.countDocuments(),
+      transactions: await transactionsCollection.countDocuments(),
+      transfers: await active_users.countDocuments(),
+    };
 
-      res.json({
-        success: true,
-        message: "Database is connected and operational",
-        collections: collections.map((col) => col.name),
-        documentCounts: stats,
-      });
-    } catch (error: any) {
-      res.status(500).json({
-        success: false,
-        message: "Database connection failed",
-        error: error.message,
-      });
-    }
+    res.json({
+      success: true,
+      message: "Database is connected and operational",
+      collections: collections.map((col) => col.name),
+      documentCounts: stats,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: "Database connection failed",
+      error: error.message,
+    });
   }
-);
+});
 
 // Database helper functions
 async function createOrUpdateCustomer(
